@@ -25,29 +25,51 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+The game is a number guessing game where the player tries to guess a secret number within a limited number of attempts. The difficulty setting controls the range and attempt limit.
+
+Bugs I found:
+- The hint messages were backwards — guessing too high told you to go higher instead of lower
+- On every even attempt, the secret number was converted to a string, breaking number comparisons
+- The Hard difficulty range (1-50) was actually easier than Normal (1-100)
+- The score incorrectly rewarded wrong "Too High" guesses on even attempts
+
+Fixes I applied:
+- Swapped the hint messages in check_guess so they correctly say "Go LOWER" and "Go HIGHER"
+- Removed the string conversion so the secret always stays an integer
+- Refactored check_guess into logic_utils.py where game logic belongs
+
 
 ## 📸 Demo Walkthrough
 
-Describe your fixed game in numbered steps so a reader can follow along without watching a video:
+1. User selects "Normal" difficulty (range 1-100, 8 attempts allowed)
+2. Game generates a secret number (e.g. 63)
+3. User enters a guess of 40 — game returns "Too Low"
+4. User enters a guess of 80 — game returns "Too High"
+5. User enters a guess of 63 — game returns "Correct!"
+6. Score updates correctly after each guess based on attempt number
+7. Game ends and displays final score
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
-```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
-```
+PS C:\Users\anang\ai110-module1show-gameglitchinvestigator-starter> python -m pytest tests/test_game_logic.py -v
+============================================= test session starts ==============================================
+platform win32 -- Python 3.13.2, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\anang\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\anang\ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.9.0
+collected 7 items                                                                                               
+
+tests/test_game_logic.py::test_winning_guess PASSED                                                       [ 14%]
+tests/test_game_logic.py::test_guess_too_high PASSED                                                      [ 28%]
+tests/test_game_logic.py::test_guess_too_low PASSED                                                       [ 42%]
+tests/test_game_logic.py::test_hint_too_high_message PASSED                                               [ 57%]
+tests/test_game_logic.py::test_secret_always_integer PASSED                                               [ 71%]
+tests/test_game_logic.py::test_secret_not_converted_to_string PASSED                                      [ 85%]
+tests/test_game_logic.py::test_even_attempt_secret_is_integer PASSED                                      [100%]
+
+============================================== 7 passed in 0.03s ===============================================
+PS C:\Users\anang\ai110-module1show-gameglitchinvestigator-starter> 
 
 ## 🚀 Stretch Features
 

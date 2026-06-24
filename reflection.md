@@ -46,13 +46,9 @@ For Bug 1, I ran pytest and confirmed test_guess_too_high and test_hint_too_high
 
 ## 4. What did you learn about Streamlit and state?
 
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+- Streamlit reruns the entire Python script from top to bottom every time the user interacts with the page, like clicking a button or typing in a box. This means normal variables reset to their original values on every rerun. Session state is a dictionary that Streamlit keeps alive between reruns, so anything stored in st.session_state persists across interactions. Without session state, the secret number would change on every button click, making the game impossible to win.
 
----
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+- One habit I want to carry forward is always running pytest after every fix, not just at the end. It caught the tuple assertion bug in the starter tests immediately, which I would have missed if I only tested manually. Next time I work with AI on a coding task, I would read the generated code more carefully before accepting it instead of just running it and seeing what breaks. This project showed me that AI generated code can look correct at first glance but have subtle logic bugs baked in, so treating it as a starting point rather than a finished solution is the right mindset.
